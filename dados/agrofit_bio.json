@@ -1,0 +1,294 @@
+{
+ "fonte": "MAPA · Agrofit, dados abertos (produtos formulados)",
+ "url": "https://dados.agricultura.gov.br/dataset/6c913699-e82e-4da3-a0a1-fb6c431e367f/resource/d30b30d7-e256-484e-9ab8-cd40974e1238/download/agrofitprodutosformulados.csv",
+ "arquivoAtualizadoEm": "19/11/2026",
+ "lidoEm": "19/11/2026 15h23",
+ "lidoIso": "2026-11-19T15:23:59-03:00",
+ "tamanhoMB": 328.1,
+ "codificacao": "utf-8-sig",
+ "colunas": {
+  "registro": "NR_REGISTRO",
+  "marca": "MARCA_COMERCIAL",
+  "ingrediente": "INGREDIENTE_ATIVO",
+  "titular": "TITULAR_DE_REGISTRO",
+  "classe": "CLASSE",
+  "cultura": "CULTURA",
+  "praga": "PRAGA_NOME_COMUM",
+  "organico": "ORGANICOS",
+  "biologico": null,
+  "formulacao": "FORMULACAO"
+ },
+ "delimitador": ";",
+ "linhasLidas": 235695,
+ "produtosFormulados": 3548,
+ "biologicos": 760,
+ "criterio": "agente biológico no ingrediente ativo",
+ "organicos": 381,
+ "grupos": [
+  [
+   "Fungos entomopatogênicos e nematófagos",
+   309
+  ],
+  [
+   "Bactérias (Bacillus e outras)",
+   173
+  ],
+  [
+   "Macrobiológicos",
+   75
+  ],
+  [
+   "Trichoderma",
+   69
+  ],
+  [
+   "Extratos e bioquímicos",
+   38
+  ],
+  [
+   "Outros",
+   35
+  ],
+  [
+   "Vírus",
+   33
+  ],
+  [
+   "Semioquímicos",
+   27
+  ],
+  [
+   "Outros fungos",
+   1
+  ]
+ ],
+ "classes": [
+  [
+   "Inseticida Microbiológico",
+   371
+  ],
+  [
+   "Fungicida microbiológico",
+   129
+  ],
+  [
+   "Nematicida Microbiológico",
+   111
+  ],
+  [
+   "Acaricida Microbiológico",
+   83
+  ],
+  [
+   "Agente Biológico de Controle",
+   77
+  ],
+  [
+   "Inseticida biológico",
+   72
+  ],
+  [
+   "Feromônio",
+   46
+  ],
+  [
+   "Inseticida",
+   24
+  ],
+  [
+   "Fungicida",
+   13
+  ],
+  [
+   "Acaricida Biológico",
+   7
+  ]
+ ],
+ "agentes": [
+  [
+   "Beauveria bassiana",
+   162
+  ],
+  [
+   "Metarhizium anisopliae",
+   149
+  ],
+  [
+   "Bacillus thuringiensis",
+   67
+  ],
+  [
+   "Trichoderma harzianum",
+   61
+  ],
+  [
+   "Bacillus subtilis",
+   44
+  ],
+  [
+   "Bacillus amyloliquefaciens",
+   42
+  ],
+  [
+   "Bacillus velezensis",
+   40
+  ],
+  [
+   "Cotesia flavipes",
+   38
+  ],
+  [
+   "Trichoderma viride",
+   22
+  ],
+  [
+   "Bacillus licheniformis",
+   17
+  ],
+  [
+   "Paecilomyces lilacinus",
+   16
+  ],
+  [
+   "Trichoderma asperellum",
+   12
+  ],
+  [
+   "Bacillus pumilus",
+   9
+  ],
+  [
+   "Chrysoperla externa",
+   8
+  ],
+  [
+   "Isaria fumosorosea",
+   7
+  ]
+ ],
+ "titulares": [
+  [
+   "Total Biotecnologia Industria e Comercio S/A - Curitiba/PR",
+   54
+  ],
+  [
+   "Koppert do Brasil Holding S.A. - Piracicaba/SP",
+   40
+  ],
+  [
+   "Bio Controle - Métodos de Controle de Pragas Ltda.",
+   26
+  ],
+  [
+   "Simbiose Biociencias S.A.",
+   26
+  ],
+  [
+   "Vittia S.A. - São Joaquim da Barra 01",
+   21
+  ],
+  [
+   "Lallemand Solucoes Biologicas Ltda - Piracicaba/SP",
+   17
+  ],
+  [
+   "Ballagro Agro Tecnologia Ltda. - Bom Jesus dos Perdões/SP",
+   16
+  ],
+  [
+   "Genica Inovação Biotecnologica S.A.. - Planta 2/Piracicaba/SP",
+   16
+  ],
+  [
+   "Bioma Indústria Comércio e Distribuição Ltda - Fazenda Rio Grande/PR",
+   15
+  ],
+  [
+   "FMC Química do Brasil Ltda. - Campinas/SP",
+   14
+  ],
+  [
+   "Vital Brasil Chemical Industria e Comercio de Produtos Quimicos Ltda - ME",
+   14
+  ],
+  [
+   "Bionat Soluções Biologicas Ltda",
+   13
+  ],
+  [
+   "Biota Innovations Industria e Comercio de Bioprodutos Ltda  Uberaba/MG",
+   13
+  ],
+  [
+   "Inflora Biociência Ltda",
+   11
+  ],
+  [
+   "Promip Manejo Integrado de Pragas Ltda.",
+   10
+  ]
+ ],
+ "culturas": [
+  [
+   "Todas as culturas",
+   698
+  ],
+  [
+   "Soja",
+   23
+  ],
+  [
+   "Tomate",
+   23
+  ],
+  [
+   "Milho",
+   20
+  ],
+  [
+   "Feijão",
+   15
+  ],
+  [
+   "Citros",
+   13
+  ],
+  [
+   "Pimentão",
+   11
+  ],
+  [
+   "Algodão",
+   10
+  ],
+  [
+   "Café",
+   10
+  ],
+  [
+   "Mamão",
+   9
+  ],
+  [
+   "Manga",
+   9
+  ],
+  [
+   "Melão",
+   9
+  ],
+  [
+   "Berinjela",
+   8
+  ],
+  [
+   "Coco",
+   8
+  ],
+  [
+   "Dendê",
+   8
+  ]
+ ],
+ "arquivoProdutos": "dados/agrofit_bio_produtos.json"
+}
