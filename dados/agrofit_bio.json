@@ -2,8 +2,8 @@
  "fonte": "MAPA · Agrofit, dados abertos (produtos formulados)",
  "url": "https://dados.agricultura.gov.br/dataset/6c913699-e82e-4da3-a0a1-fb6c431e367f/resource/d30b30d7-e256-484e-9ab8-cd40974e1238/download/agrofitprodutosformulados.csv",
  "arquivoAtualizadoEm": "19/11/2026",
- "lidoEm": "19/11/2026 15h40",
- "lidoIso": "2026-11-19T15:40:14-03:00",
+ "lidoEm": "19/11/2026 15h46",
+ "lidoIso": "2026-11-19T15:46:36-03:00",
  "tamanhoMB": 396.9,
  "codificacao": "utf-8-sig",
  "colunas": {
@@ -192,11 +192,11 @@
    22
   ],
   [
-   "Solubio Tecnologias Agricolas S.A.  Jataí/GO",
+   "Solubio Tecnologias Agricolas S.A. – Jataí/GO",
    20
   ],
   [
-   "Biota Innovations Industria e Comercio de Bioprodutos Ltda  Uberaba/MG",
+   "Biota Innovations Industria e Comercio de Bioprodutos Ltda – Uberaba/MG",
    19
   ],
   [
@@ -225,6 +225,68 @@
   ],
   [
    "Vital Brasil Chemical Industria e Comercio de Produtos Quimicos Ltda - ME",
+   15
+  ]
+ ],
+ "empresas": [
+  [
+   "Total Biotecnologia",
+   56
+  ],
+  [
+   "Koppert Brasil",
+   54
+  ],
+  [
+   "Simbiose Biociencias",
+   35
+  ],
+  [
+   "Bio Controle",
+   27
+  ],
+  [
+   "Vittia",
+   24
+  ],
+  [
+   "Bioma",
+   22
+  ],
+  [
+   "Solubio Tecnologias",
+   20
+  ],
+  [
+   "Biota Innovations",
+   19
+  ],
+  [
+   "Ballagro Agro",
+   18
+  ],
+  [
+   "Lallemand Solucoes",
+   17
+  ],
+  [
+   "Genica Inovação",
+   17
+  ],
+  [
+   "Bionat Soluções",
+   15
+  ],
+  [
+   "FMC Química",
+   15
+  ],
+  [
+   "Andermatt Brasil",
+   15
+  ],
+  [
+   "Vital Brasil",
    15
   ]
  ],
@@ -287,6 +349,10 @@
   ],
   [
    "Berinjela",
+   9
+  ],
+  [
+   "Melancia",
    9
   ]
  ],
