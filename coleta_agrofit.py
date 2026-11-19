@@ -276,7 +276,7 @@ def main():
         if var < -0.15:
             saida["alerta"] = (f"Produtos formulados caíram {abs(var)*100:.0f}% em relação à leitura de "
                                f"{anterior.get('lidoEm')}; conferir antes de usar.")
-    hist = "dados/historico.csv"
+    hist = __import__("os").path.join(__import__("os").path.dirname(a.saida) or ".", "historico.csv")
     novo = not __import__("os").path.exists(hist)
     with open(hist, "a", encoding="utf-8") as f:
         if novo:
