@@ -97,7 +97,18 @@ def achar(campos, *opcoes):
     return None
 
 
+MARCA_MACRO = re.compile(r"[aá]caros vivos|nemat[oó]ides entomopatog|indiv[ií]duos|insetos vivos|parasit[oó]ide|pupa", re.I)
+MARCA_SEMIO = re.compile(r"\((acetato|alde[ií]do|[aá]lcool|cetona|hidrocarboneto|[eé]ter|cetal|amida|[eé]steres)[^)]*\)", re.I)
+BACT_EXTRA = re.compile(r"priestia|rhizobium|azotobacter|agrobacterium|xanthomonas|ensifer|enterobacter", re.I)
+
+
 def grupo_de(texto):
+    if MARCA_MACRO.search(texto):
+        return "Macrobiológicos"
+    if BACT_EXTRA.search(texto):
+        return "Bactérias (Bacillus e outras)"
+    if MARCA_SEMIO.search(texto) and not re.search(r"extrato|azadirac", texto, re.I):
+        return "Semioquímicos"
     for nome, pad in GRUPOS:
         if re.search(pad, texto, re.I):
             return nome
@@ -222,6 +233,27 @@ def main():
         "codificacao": enc,
         **res,
     }
+    # checagem contra arquivo incompleto: compara com a leitura anterior
+    anterior = None
+    try:
+        anterior = json.load(open(a.saida, encoding="utf-8"))
+    except (OSError, ValueError):
+        pass
+    saida["alerta"] = None
+    if anterior and anterior.get("produtosFormulados"):
+        var = saida["produtosFormulados"] / anterior["produtosFormulados"] - 1
+        saida["variacaoFormulados"] = round(var * 100, 1)
+        if var < -0.15:
+            saida["alerta"] = (f"Produtos formulados caíram {abs(var)*100:.0f}% em relação à leitura de "
+                               f"{anterior.get('lidoEm')}; conferir antes de usar.")
+    hist = "dados/historico.csv"
+    novo = not __import__("os").path.exists(hist)
+    with open(hist, "a", encoding="utf-8") as f:
+        if novo:
+            f.write("lido_em;arquivo_atualizado_em;tamanho_mb;linhas;produtos_formulados;biologicos;organicos\n")
+        f.write(f"{saida['lidoEm']};{saida['arquivoAtualizadoEm'] or ''};{saida['tamanhoMB']};{saida['linhasLidas']};"
+                f"{saida['produtosFormulados']};{saida['biologicos']};{saida['organicos']}\n")
+
     produtos = saida.pop("produtos")
     saida["arquivoProdutos"] = a.saida.replace(".json", "_produtos.json")
     with open(a.saida, "w", encoding="utf-8") as f:
