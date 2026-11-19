@@ -54,10 +54,26 @@ def chave(nome):
     return re.sub(r"[^A-Z0-9]+", "_", sem_acento(nome).upper()).strip("_")
 
 
-def baixar(url):
-    req = urllib.request.Request(url, headers=UA)
-    with urllib.request.urlopen(req, timeout=300) as r:
-        return r.read()
+def baixar(url, tentativas=3):
+    """Baixa o arquivo e confere se veio inteiro (tamanho declarado e última linha completa)."""
+    import time
+    erro = None
+    for n in range(1, tentativas + 1):
+        try:
+            req = urllib.request.Request(url, headers=UA)
+            with urllib.request.urlopen(req, timeout=600) as r:
+                esperado = r.headers.get("Content-Length")
+                dados = r.read()
+            if esperado and len(dados) != int(esperado):
+                raise IOError(f"download incompleto: {len(dados)} de {esperado} bytes")
+            if url.endswith(".csv") and not dados.rstrip(b" ").endswith((b"\n", b"\r")):
+                raise IOError("download incompleto: última linha cortada")
+            return dados
+        except Exception as e:
+            erro = e
+            print(f"tentativa {n}: {e}", file=sys.stderr)
+            time.sleep(20 * n)
+    raise SystemExit(f"não consegui baixar o arquivo inteiro: {erro}")
 
 
 def info_pacote():
