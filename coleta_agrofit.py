@@ -50,6 +50,18 @@ def sem_acento(t):
     return "".join(c for c in unicodedata.normalize("NFD", t or "") if unicodedata.category(c) != "Mn")
 
 
+def limpo(t):
+    return re.sub(r"\s+", " ", (t or "").replace("\x96", "–").replace("\x97", "—")).strip()
+
+
+def empresa_curta(t):
+    t = re.split(r"\s+[-–]\s+", limpo(t))[0]
+    t = re.sub(r"\b(ltda|s\.?/?a\.?|eireli|me|epp)\b\.?", "", t, flags=re.I)
+    t = re.sub(r"\b(ind[uú]stria|com[eé]rcio|e|de|do|da|distribui[cç][aã]o|importa[cç][aã]o|exporta[cç][aã]o)\b", " ", t, flags=re.I)
+    t = re.sub(r"\s+", " ", t).strip(" .,-")
+    return " ".join(t.split()[:2])
+
+
 def chave(nome):
     return re.sub(r"[^A-Z0-9]+", "_", sem_acento(nome).upper()).strip("_")
 
@@ -173,7 +185,7 @@ def processar(texto):
                                  "culturas": set(), "pragas": set()}
         for k in ("marca", "ingrediente", "titular", "classe", "organico", "formulacao"):
             if col[k] and not p[k]:
-                p[k] = (r.get(col[k]) or "").strip()
+                p[k] = limpo(r.get(col[k]))
         if col["biologico"] and not p["biologicoCol"]:
             p["biologicoCol"] = (r.get(col["biologico"]) or "").strip()
         if col["cultura"] and r.get(col["cultura"]):
@@ -193,6 +205,7 @@ def processar(texto):
 
     por_grupo = Counter(p["grupo"] for p in bios)
     por_titular = Counter(p["titular"] for p in bios if p["titular"])
+    por_empresa = Counter(empresa_curta(p["titular"]) for p in bios if p["titular"])
     por_cultura = Counter(c for p in bios for c in sorted(p["culturas"]))
     por_classe = Counter(c.strip() for p in bios for c in re.split(r"[;,/]| e ", p["classe"]) if c.strip())
     organicos = sum(1 for p in bios if sem_acento(p["organico"]).lower().startswith("s"))
@@ -216,7 +229,8 @@ def processar(texto):
         "classes": por_classe.most_common(10),
         "agentes": agentes.most_common(15),
         "titulares": por_titular.most_common(15),
-        "culturas": por_cultura.most_common(15),
+        "empresas": por_empresa.most_common(15),
+        "culturas": por_cultura.most_common(16),
         "produtos": sorted(
             [[p["registro"], p["marca"], p["ingrediente"][:120], p["titular"], p["grupo"],
               len(p["culturas"]), len(p["pragas"])] for p in bios],
