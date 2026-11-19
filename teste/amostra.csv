@@ -1,0 +1,7 @@
+NR_REGISTRO;MARCA_COMERCIAL;FORMULACAO;INGREDIENTE_ATIVO;TITULAR_DE_REGISTRO;CLASSE;MODO_DE_ACAO;CULTURA;PRAGA_NOME_CIENTIFICO;PRAGA_NOME_COMUM;ORGANICOS
+12345;Boveril WP;WP;Beauveria bassiana (IBCB 66);Koppert do Brasil;Inseticida microbiológico;Contato;Soja;Euschistus heros;Percevejo-marrom;Sim
+12345;Boveril WP;WP;Beauveria bassiana (IBCB 66);Koppert do Brasil;Inseticida microbiológico;Contato;Café;Hypothenemus hampei;Broca-do-café;Sim
+22222;Tricho Max;SC;Trichoderma harzianum (IB 19/17);Biota Agro;Fungicida microbiológico;Contato;Feijão;Sclerotinia sclerotiorum;Mofo-branco;Sim
+33333;Glifosato X;SL;Glifosato (sal de isopropilamina);Química SA;Herbicida;Sistêmico;Soja;Conyza;Buva;Não
+44444;Bt Agro;WP;Bacillus thuringiensis var. kurstaki + Bacillus velezensis;Vittia;Inseticida microbiológico;Ingestão;Milho;Spodoptera frugiperda;Lagarta-do-cartucho;Sim
+55555;Feromonio Spod;;Acetato de (Z)-9-tetradecenila;Prophyto;Feromônio;;Milho;Spodoptera frugiperda;Lagarta-do-cartucho;Sim

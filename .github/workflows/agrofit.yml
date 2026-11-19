@@ -1,0 +1,28 @@
+name: Coleta Agrofit
+
+on:
+  schedule:
+    - cron: "17 9 * * *"   # todo dia às 06h17 (Brasília)
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+
+jobs:
+  coleta:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Baixar e processar o Agrofit
+        run: python coleta_agrofit.py
+      - name: Gravar o resultado no repositório
+        run: |
+          git config user.name "coleta-agrofit"
+          git config user.email "coleta-agrofit@users.noreply.github.com"
+          git add dados/agrofit_bio.json dados/agrofit_bio_produtos.json
+          git diff --cached --quiet || git commit -m "Agrofit: coleta de $(TZ=America/Sao_Paulo date +%d/%m/%Y)"
+          git push
