@@ -2,9 +2,9 @@
  "fonte": "MAPA · Agrofit, dados abertos (produtos formulados)",
  "url": "https://dados.agricultura.gov.br/dataset/6c913699-e82e-4da3-a0a1-fb6c431e367f/resource/d30b30d7-e256-484e-9ab8-cd40974e1238/download/agrofitprodutosformulados.csv",
  "arquivoAtualizadoEm": "19/11/2026",
- "lidoEm": "19/11/2026 15h23",
- "lidoIso": "2026-11-19T15:23:59-03:00",
- "tamanhoMB": 328.1,
+ "lidoEm": "19/11/2026 15h28",
+ "lidoIso": "2026-11-19T15:28:45-03:00",
+ "tamanhoMB": 396.9,
  "codificacao": "utf-8-sig",
  "colunas": {
   "registro": "NR_REGISTRO",
@@ -19,43 +19,43 @@
   "formulacao": "FORMULACAO"
  },
  "delimitador": ";",
- "linhasLidas": 235695,
- "produtosFormulados": 3548,
- "biologicos": 760,
+ "linhasLidas": 281946,
+ "produtosFormulados": 4433,
+ "biologicos": 946,
  "criterio": "agente biológico no ingrediente ativo",
- "organicos": 381,
+ "organicos": 465,
  "grupos": [
   [
    "Fungos entomopatogênicos e nematófagos",
-   309
+   332
   ],
   [
    "Bactérias (Bacillus e outras)",
-   173
-  ],
-  [
-   "Macrobiológicos",
-   75
+   218
   ],
   [
    "Trichoderma",
-   69
+   130
   ],
   [
-   "Extratos e bioquímicos",
-   38
-  ],
-  [
-   "Outros",
-   35
-  ],
-  [
-   "Vírus",
-   33
+   "Macrobiológicos",
+   117
   ],
   [
    "Semioquímicos",
-   27
+   52
+  ],
+  [
+   "Vírus",
+   49
+  ],
+  [
+   "Extratos e bioquímicos",
+   45
+  ],
+  [
+   "Outros",
+   2
   ],
   [
    "Outros fungos",
@@ -65,230 +65,232 @@
  "classes": [
   [
    "Inseticida Microbiológico",
-   371
+   421
   ],
   [
    "Fungicida microbiológico",
-   129
+   201
   ],
   [
    "Nematicida Microbiológico",
-   111
-  ],
-  [
-   "Acaricida Microbiológico",
-   83
+   138
   ],
   [
    "Agente Biológico de Controle",
-   77
+   104
   ],
   [
    "Inseticida biológico",
-   72
+   101
+  ],
+  [
+   "Acaricida Microbiológico",
+   88
   ],
   [
    "Feromônio",
-   46
+   51
   ],
   [
    "Inseticida",
-   24
+   28
   ],
   [
    "Fungicida",
-   13
+   21
   ],
   [
    "Acaricida Biológico",
-   7
+   8
   ]
  ],
  "agentes": [
   [
    "Beauveria bassiana",
-   162
+   176
   ],
   [
    "Metarhizium anisopliae",
-   149
-  ],
-  [
-   "Bacillus thuringiensis",
-   67
+   155
   ],
   [
    "Trichoderma harzianum",
-   61
+   121
+  ],
+  [
+   "Bacillus thuringiensis",
+   80
   ],
   [
    "Bacillus subtilis",
-   44
+   61
   ],
   [
    "Bacillus amyloliquefaciens",
-   42
+   59
   ],
   [
    "Bacillus velezensis",
-   40
-  ],
-  [
-   "Cotesia flavipes",
-   38
+   55
   ],
   [
    "Trichoderma viride",
-   22
+   44
+  ],
+  [
+   "Cotesia flavipes",
+   39
   ],
   [
    "Bacillus licheniformis",
-   17
-  ],
-  [
-   "Paecilomyces lilacinus",
-   16
+   21
   ],
   [
    "Trichoderma asperellum",
-   12
+   21
+  ],
+  [
+   "Paecilomyces lilacinus",
+   17
+  ],
+  [
+   "Trichogramma pretiosum",
+   14
   ],
   [
    "Bacillus pumilus",
-   9
+   13
   ],
   [
-   "Chrysoperla externa",
-   8
-  ],
-  [
-   "Isaria fumosorosea",
-   7
+   "Trichogramma galloi",
+   10
   ]
  ],
  "titulares": [
   [
    "Total Biotecnologia Industria e Comercio S/A - Curitiba/PR",
-   54
+   56
   ],
   [
    "Koppert do Brasil Holding S.A. - Piracicaba/SP",
-   40
-  ],
-  [
-   "Bio Controle - Métodos de Controle de Pragas Ltda.",
-   26
+   54
   ],
   [
    "Simbiose Biociencias S.A.",
-   26
+   35
+  ],
+  [
+   "Bio Controle - Métodos de Controle de Pragas Ltda.",
+   27
   ],
   [
    "Vittia S.A. - São Joaquim da Barra 01",
-   21
+   24
+  ],
+  [
+   "Bioma Indústria Comércio e Distribuição Ltda - Fazenda Rio Grande/PR",
+   22
+  ],
+  [
+   "Solubio Tecnologias Agricolas S.A.  Jataí/GO",
+   20
+  ],
+  [
+   "Biota Innovations Industria e Comercio de Bioprodutos Ltda  Uberaba/MG",
+   19
+  ],
+  [
+   "Ballagro Agro Tecnologia Ltda. - Bom Jesus dos Perdões/SP",
+   18
   ],
   [
    "Lallemand Solucoes Biologicas Ltda - Piracicaba/SP",
    17
   ],
   [
-   "Ballagro Agro Tecnologia Ltda. - Bom Jesus dos Perdões/SP",
-   16
-  ],
-  [
    "Genica Inovação Biotecnologica S.A.. - Planta 2/Piracicaba/SP",
-   16
+   17
   ],
   [
-   "Bioma Indústria Comércio e Distribuição Ltda - Fazenda Rio Grande/PR",
+   "Bionat Soluções Biologicas Ltda",
    15
   ],
   [
    "FMC Química do Brasil Ltda. - Campinas/SP",
-   14
+   15
+  ],
+  [
+   "Andermatt do Brasil Soluções Biológicas Ltda - Londrina/PR",
+   15
   ],
   [
    "Vital Brasil Chemical Industria e Comercio de Produtos Quimicos Ltda - ME",
-   14
-  ],
-  [
-   "Bionat Soluções Biologicas Ltda",
-   13
-  ],
-  [
-   "Biota Innovations Industria e Comercio de Bioprodutos Ltda  Uberaba/MG",
-   13
-  ],
-  [
-   "Inflora Biociência Ltda",
-   11
-  ],
-  [
-   "Promip Manejo Integrado de Pragas Ltda.",
-   10
+   15
   ]
  ],
  "culturas": [
   [
    "Todas as culturas",
-   698
+   874
   ],
   [
    "Soja",
-   23
+   30
   ],
   [
    "Tomate",
-   23
+   27
   ],
   [
    "Milho",
-   20
+   23
   ],
   [
    "Feijão",
-   15
+   17
   ],
   [
    "Citros",
-   13
-  ],
-  [
-   "Pimentão",
-   11
+   14
   ],
   [
    "Algodão",
-   10
+   12
   ],
   [
    "Café",
-   10
+   12
   ],
   [
-   "Mamão",
-   9
+   "Pimentão",
+   12
   ],
   [
    "Manga",
-   9
+   11
+  ],
+  [
+   "Mamão",
+   10
   ],
   [
    "Melão",
+   10
+  ],
+  [
+   "Uva",
+   10
+  ],
+  [
+   "Batata",
    9
   ],
   [
    "Berinjela",
-   8
-  ],
-  [
-   "Coco",
-   8
-  ],
-  [
-   "Dendê",
-   8
+   9
   ]
  ],
+ "alerta": null,
+ "variacaoFormulados": 24.9,
  "arquivoProdutos": "dados/agrofit_bio_produtos.json"
 }
