@@ -1,10 +1,10 @@
 {
  "fonte": "MAPA · Agrofit, dados abertos (produtos formulados)",
  "url": "https://dados.agricultura.gov.br/dataset/6c913699-e82e-4da3-a0a1-fb6c431e367f/resource/d30b30d7-e256-484e-9ab8-cd40974e1238/download/agrofitprodutosformulados.csv",
- "arquivoAtualizadoEm": "19/11/2026",
- "lidoEm": "19/11/2026 15h46",
- "lidoIso": "2026-11-19T15:46:36-03:00",
- "tamanhoMB": 396.9,
+ "arquivoAtualizadoEm": "20/11/2026",
+ "lidoEm": "20/11/2026 07h28",
+ "lidoIso": "2026-11-20T07:28:12-03:00",
+ "tamanhoMB": 397.2,
  "codificacao": "utf-8-sig",
  "colunas": {
   "registro": "NR_REGISTRO",
@@ -19,7 +19,7 @@
   "formulacao": "FORMULACAO"
  },
  "delimitador": ";",
- "linhasLidas": 281946,
+ "linhasLidas": 281967,
  "produtosFormulados": 4433,
  "biologicos": 946,
  "criterio": "agente biológico no ingrediente ativo",
