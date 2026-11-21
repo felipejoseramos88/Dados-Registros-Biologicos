@@ -1,9 +1,9 @@
 {
  "fonte": "MAPA · Agrofit, dados abertos (produtos formulados)",
  "url": "https://dados.agricultura.gov.br/dataset/6c913699-e82e-4da3-a0a1-fb6c431e367f/resource/d30b30d7-e256-484e-9ab8-cd40974e1238/download/agrofitprodutosformulados.csv",
- "arquivoAtualizadoEm": "20/11/2026",
- "lidoEm": "20/11/2026 07h28",
- "lidoIso": "2026-11-20T07:28:12-03:00",
+ "arquivoAtualizadoEm": "21/11/2026",
+ "lidoEm": "21/11/2026 07h02",
+ "lidoIso": "2026-11-21T07:02:45-03:00",
  "tamanhoMB": 397.2,
  "codificacao": "utf-8-sig",
  "colunas": {
@@ -19,15 +19,15 @@
   "formulacao": "FORMULACAO"
  },
  "delimitador": ";",
- "linhasLidas": 281967,
- "produtosFormulados": 4433,
- "biologicos": 946,
+ "linhasLidas": 281976,
+ "produtosFormulados": 4435,
+ "biologicos": 948,
  "criterio": "agente biológico no ingrediente ativo",
  "organicos": 465,
  "grupos": [
   [
    "Fungos entomopatogênicos e nematófagos",
-   332
+   334
   ],
   [
    "Bactérias (Bacillus e outras)",
@@ -65,7 +65,7 @@
  "classes": [
   [
    "Inseticida Microbiológico",
-   421
+   423
   ],
   [
    "Fungicida microbiológico",
@@ -85,7 +85,7 @@
   ],
   [
    "Acaricida Microbiológico",
-   88
+   89
   ],
   [
    "Feromônio",
@@ -107,11 +107,11 @@
  "agentes": [
   [
    "Beauveria bassiana",
-   176
+   177
   ],
   [
    "Metarhizium anisopliae",
-   155
+   156
   ],
   [
    "Trichoderma harzianum",
@@ -293,7 +293,7 @@
  "culturas": [
   [
    "Todas as culturas",
-   874
+   876
   ],
   [
    "Soja",
