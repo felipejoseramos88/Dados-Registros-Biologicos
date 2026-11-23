@@ -43,7 +43,8 @@ def main():
     uf = {SIGLA.get(r["state"], r["state"]): float(r["metricKG"]) / 1e9 for r in consulta(f"{ano}-01", ate, ["state"], False)}
     uf_ant = {SIGLA.get(r["state"], r["state"]): float(r["metricKG"]) / 1e9 for r in consulta(f"{ano-1}-01", ate_ant, ["state"], False)}
     mensal = {}
-    for r in consulta(f"{ano-1}-01", ate, [], True):
+    # o Comex Stat aplica o intervalo de meses a cada ano; por isso o ano anterior completo vem em consulta própria
+    for r in consulta(f"{ano-1}-01", f"{ano-1}-12", [], True) + consulta(f"{ano}-01", ate, [], True):
         mensal[f"{r['year']}-{int(r['monthNumber']):02d}"] = float(r["metricKG"]) / 1e9
     tot, tot_ant = sum(uf.values()), sum(uf_ant.values())
     agora = datetime.now(BRT)

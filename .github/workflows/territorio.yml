@@ -3,7 +3,12 @@ name: Coleta Território e Comex
 on:
   schedule:
     - cron: "53 10 8,22 * *"   # dias 8 e 22 às 07h53 (Brasília): crédito e importação saem mensalmente
-  workflow_dispatch: {}
+  workflow_dispatch:
+    inputs:
+      so_comex:
+        description: "Coletar só a importação de fertilizantes"
+        type: boolean
+        default: false
 
 permissions:
   contents: write
@@ -20,6 +25,7 @@ jobs:
       - name: Importação de fertilizantes (Comex Stat)
         run: python coleta_comex.py
       - name: Território (IBGE, Banco Central, SIPEAGRO)
+        if: ${{ !inputs.so_comex }}
         run: python coleta_territorio.py
       - name: Gravar o resultado no repositório
         if: always()
