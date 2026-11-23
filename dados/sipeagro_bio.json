@@ -1,0 +1,593 @@
+{
+ "fonte": "MAPA · SIPEAGRO, dados abertos (estabelecimentos de fertilizantes, inoculantes e corretivos)",
+ "url": "https://dados.agricultura.gov.br/dataset/52a01565-72d6-410e-b21b-64035831a7be/resource/e0bbc9d5-f161-448b-a6d4-c7beb312ec33/download/sipeagrofertilizante.csv",
+ "arquivoAtualizadoEm": "22/11/2026",
+ "lidoEm": "23/11/2026 15h56",
+ "lidoIso": "2026-11-23T15:56:01-03:00",
+ "linhas": 16021,
+ "registrosAtivos": 10659,
+ "porAtividade": [
+  [
+   "Comerciante",
+   7809
+  ],
+  [
+   "Produtor",
+   2298
+  ],
+  [
+   "Importador",
+   1074
+  ],
+  [
+   "Exportador",
+   204
+  ]
+ ],
+ "inoculante": {
+  "estabelecimentos": 109,
+  "uf": [
+   [
+    "SP",
+    38
+   ],
+   [
+    "PR",
+    22
+   ],
+   [
+    "MG",
+    11
+   ],
+   [
+    "MT",
+    10
+   ],
+   [
+    "RS",
+    9
+   ],
+   [
+    "GO",
+    6
+   ],
+   [
+    "SC",
+    4
+   ],
+   [
+    "TO",
+    2
+   ],
+   [
+    "DF",
+    2
+   ],
+   [
+    "BA",
+    1
+   ],
+   [
+    "RJ",
+    1
+   ],
+   [
+    "PE",
+    1
+   ],
+   [
+    "MA",
+    1
+   ],
+   [
+    "PA",
+    1
+   ]
+  ],
+  "empresas": [
+   [
+    "Total Biotecnologia",
+    3
+   ],
+   [
+    "Inocular Soluções",
+    2
+   ],
+   [
+    "Icb Bioagritec",
+    2
+   ],
+   [
+    "Vittia",
+    2
+   ],
+   [
+    "Lallemand",
+    2
+   ],
+   [
+    "Chr. Hansen",
+    1
+   ],
+   [
+    "Imeve- Medicamentos",
+    1
+   ],
+   [
+    "Bioagro Agropecuario",
+    1
+   ],
+   [
+    "Lallemand Soluções",
+    1
+   ],
+   [
+    "Biorosam Biotecnologia",
+    1
+   ],
+   [
+    "Forbio Agrociencia",
+    1
+   ],
+   [
+    "Amtec Bioagrícola",
+    1
+   ],
+   [
+    "Biossíntese Agriscience",
+    1
+   ],
+   [
+    "Biodiversita Serviços",
+    1
+   ],
+   [
+    "Elo Simbiotica",
+    1
+   ]
+  ]
+ },
+ "biofertilizante": {
+  "estabelecimentos": 106,
+  "uf": [
+   [
+    "SP",
+    42
+   ],
+   [
+    "MG",
+    17
+   ],
+   [
+    "SC",
+    15
+   ],
+   [
+    "PR",
+    8
+   ],
+   [
+    "MT",
+    6
+   ],
+   [
+    "RS",
+    5
+   ],
+   [
+    "ES",
+    3
+   ],
+   [
+    "PE",
+    2
+   ],
+   [
+    "GO",
+    2
+   ],
+   [
+    "MA",
+    1
+   ],
+   [
+    "BA",
+    1
+   ],
+   [
+    "PB",
+    1
+   ],
+   [
+    "DF",
+    1
+   ],
+   [
+    "RJ",
+    1
+   ],
+   [
+    "CE",
+    1
+   ]
+  ],
+  "empresas": [
+   [
+    "Fersol",
+    1
+   ],
+   [
+    "Timac Agro",
+    1
+   ],
+   [
+    "Visafertil Fertilizantes",
+    1
+   ],
+   [
+    "Sinergia Agro",
+    1
+   ],
+   [
+    "Global Saude",
+    1
+   ],
+   [
+    "Rhal Produtos",
+    1
+   ],
+   [
+    "Fertagro Fertilizantes",
+    1
+   ],
+   [
+    "Brandt Soluções",
+    1
+   ],
+   [
+    "Allchem Quimica",
+    1
+   ],
+   [
+    "Ecobhio Tecnologia",
+    1
+   ],
+   [
+    "Nogueira &",
+    1
+   ],
+   [
+    "Tradecorp Brasil",
+    1
+   ],
+   [
+    "Meruoca Materias-Primas",
+    1
+   ],
+   [
+    "Verdemar Fazenda",
+    1
+   ],
+   [
+    "Acadian Brasil",
+    1
+   ]
+  ]
+ },
+ "comerciantes": {
+  "total": 7809,
+  "uf": [
+   [
+    "SP",
+    1651
+   ],
+   [
+    "MG",
+    983
+   ],
+   [
+    "MT",
+    760
+   ],
+   [
+    "RS",
+    621
+   ],
+   [
+    "SC",
+    521
+   ],
+   [
+    "BA",
+    497
+   ],
+   [
+    "GO",
+    477
+   ],
+   [
+    "ES",
+    325
+   ],
+   [
+    "RO",
+    281
+   ],
+   [
+    "MS",
+    256
+   ],
+   [
+    "CE",
+    233
+   ],
+   [
+    "SE",
+    177
+   ],
+   [
+    "PA",
+    151
+   ],
+   [
+    "PB",
+    116
+   ],
+   [
+    "TO",
+    114
+   ],
+   [
+    "RJ",
+    100
+   ],
+   [
+    "PR",
+    99
+   ],
+   [
+    "MA",
+    98
+   ],
+   [
+    "DF",
+    70
+   ],
+   [
+    "PE",
+    60
+   ],
+   [
+    "AL",
+    59
+   ],
+   [
+    "RN",
+    41
+   ],
+   [
+    "AM",
+    37
+   ],
+   [
+    "AC",
+    32
+   ],
+   [
+    "PI",
+    25
+   ],
+   [
+    "RR",
+    21
+   ],
+   [
+    "AP",
+    4
+   ]
+  ],
+  "municipiosBioCAZ": [
+   [
+    "BA",
+    "Luís Eduardo Magalhães",
+    89
+   ],
+   [
+    "MT",
+    "Sorriso",
+    73
+   ],
+   [
+    "MG",
+    "Uberaba",
+    67
+   ],
+   [
+    "MT",
+    "Rondonópolis",
+    65
+   ],
+   [
+    "MT",
+    "Cuiabá",
+    59
+   ],
+   [
+    "GO",
+    "Rio Verde",
+    54
+   ],
+   [
+    "GO",
+    "Goiânia",
+    50
+   ],
+   [
+    "MG",
+    "Uberlândia",
+    48
+   ],
+   [
+    "MG",
+    "Belo Horizonte",
+    47
+   ],
+   [
+    "MS",
+    "Dourados",
+    45
+   ],
+   [
+    "GO",
+    "Aparecida de Goiânia",
+    45
+   ],
+   [
+    "MT",
+    "Primavera do Leste",
+    43
+   ],
+   [
+    "MT",
+    "Sinop",
+    42
+   ],
+   [
+    "MS",
+    "Campo Grande",
+    40
+   ],
+   [
+    "MT",
+    "Lucas do Rio Verde",
+    35
+   ],
+   [
+    "GO",
+    "Jataí",
+    34
+   ],
+   [
+    "MT",
+    "Nova Mutum",
+    32
+   ],
+   [
+    "MT",
+    "Querência",
+    29
+   ],
+   [
+    "MA",
+    "São Luís",
+    29
+   ],
+   [
+    "BA",
+    "Juazeiro",
+    28
+   ],
+   [
+    "MG",
+    "Patos de Minas",
+    28
+   ],
+   [
+    "GO",
+    "Catalão",
+    27
+   ],
+   [
+    "MA",
+    "Balsas",
+    26
+   ],
+   [
+    "MT",
+    "Campo Novo do Parecis",
+    26
+   ],
+   [
+    "MS",
+    "Chapadão do Sul",
+    26
+   ],
+   [
+    "MG",
+    "Patrocínio",
+    25
+   ],
+   [
+    "MT",
+    "Canarana",
+    25
+   ],
+   [
+    "MT",
+    "Confresa",
+    24
+   ],
+   [
+    "TO",
+    "Palmas",
+    24
+   ],
+   [
+    "MT",
+    "Campo Verde",
+    21
+   ],
+   [
+    "TO",
+    "Araguaína",
+    21
+   ],
+   [
+    "MT",
+    "Alta Floresta",
+    20
+   ],
+   [
+    "GO",
+    "Cristalina",
+    20
+   ],
+   [
+    "MG",
+    "Araguari",
+    20
+   ],
+   [
+    "MG",
+    "Paracatu",
+    20
+   ],
+   [
+    "MG",
+    "Unaí",
+    20
+   ],
+   [
+    "MT",
+    "Água Boa",
+    20
+   ],
+   [
+    "BA",
+    "Vitória da Conquista",
+    18
+   ],
+   [
+    "BA",
+    "Feira de Santana",
+    17
+   ],
+   [
+    "MT",
+    "Matupá",
+    17
+   ]
+  ]
+ },
+ "nota": "Estabelecimentos com registro ativo no SIPEAGRO. Inoculante e biofertilizante = fábricas e importadores com essa classificação; comerciantes = revendas registradas para fertilizantes, inoculantes e corretivos."
+}
