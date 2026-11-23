@@ -63,17 +63,48 @@ def pam():
 
 
 # ---------- Banco Central · SICOR ----------
+# A API não aceita $skip e devolve no máximo 5.000 linhas: dividimos a consulta por estado, mês e,
+# quando preciso, por produto, tipo de seguro e programa, até cada parte ficar abaixo do limite.
+BCB_UF = {"51": "14", "52": "10", "31": "12", "29": "6", "17": "28", "21": "11", "22": "18"}   # IBGE -> código do BCB
+LIMITE = 5000
+DIMS = ["cdProduto", "cdTipoSeguro", "cdPrograma", "cdFonteRecurso", "cdModalidade"]
+CAMPOS = "codIbge,nomeProduto,VlCusteio,AreaCusteio," + ",".join(DIMS)
+
+
+def sicor_consulta(filtro):
+    u = f"{SICOR}?$format=json&$select={CAMPOS}&$top={LIMITE}&$filter={urllib.parse.quote(filtro)}"
+    return json.loads(get(u))["value"]
+
+
+def sicor_partes(filtro, nivel=0):
+    v = sicor_consulta(filtro)
+    if len(v) < LIMITE:
+        return v
+    if nivel >= len(DIMS):
+        raise SystemExit(f"consulta ainda no limite após dividir: {filtro}")
+    dim = DIMS[nivel]
+    vals = sorted({r[dim] for r in v})
+    out = []
+    for x in vals:
+        out += sicor_partes(f"{filtro} and {dim} eq '{x}'", nivel + 1)
+    resto = " and ".join(f"{dim} ne '{x}'" for x in vals)
+    out += sicor_partes(f"{filtro} and {resto}", nivel + 1)
+    return out
+
+
 def sicor_mes(ano, mes):
-    out, skip, top = [], 0, 20000
-    filtro = urllib.parse.quote(f"AnoEmissao eq '{ano}' and MesEmissao eq '{mes:02d}' and Atividade eq '1'")
-    sel = "codIbge,nomeProduto,VlCusteio,AreaCusteio"
-    while True:
-        u = f"{SICOR}?$format=json&$select={sel}&$filter={filtro}&$top={top}&$skip={skip}"
-        v = json.loads(get(u))["value"]
-        out += v
-        if len(v) < top:
-            return out
-        skip += top
+    from concurrent.futures import ThreadPoolExecutor
+    base = f"AnoEmissao eq '{ano}' and MesEmissao eq '{mes:02d}' and Atividade eq '1'"
+    with ThreadPoolExecutor(max_workers=4) as ex:
+        partes = list(ex.map(lambda cb: sicor_partes(f"{base} and cdEstado eq '{cb}'"), BCB_UF.values()))
+    linhas = [r for p in partes for r in p]
+    # confere se o código do BCB corresponde ao estado esperado
+    for (ibge, cb), p in zip(BCB_UF.items(), partes):
+        errados = [r for r in p if not (r.get("codIbge") or "").startswith(ibge)]
+        if p and len(errados) > len(p) * 0.02:
+            raise SystemExit(f"código de estado do BCB {cb} não corresponde à UF {ibge}")
+    print(f"  crédito {mes:02d}/{ano}: {len(linhas)} linhas", flush=True)
+    return linhas
 
 
 def credito():
@@ -81,10 +112,9 @@ def credito():
     ano = hoje.year if hoje.month >= 7 else hoje.year - 1     # safra começa em julho
     meses = []
     for mes in range(7, 13):
-        dados = sicor_mes(ano, mes)
-        if not dados:
+        if not sicor_consulta(f"AnoEmissao eq '{ano}' and MesEmissao eq '{mes:02d}' and cdEstado eq '14'")[:1]:
             break
-        meses.append((mes, dados))
+        meses.append((mes, sicor_mes(ano, mes)))
     if not meses:
         raise SystemExit("sem dados de crédito na safra corrente")
     atual, anterior = defaultdict(float), defaultdict(float)
