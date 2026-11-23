@@ -65,7 +65,25 @@ def pam():
 # ---------- Banco Central · SICOR ----------
 # A API não aceita $skip e devolve no máximo 5.000 linhas: dividimos a consulta por estado, mês e,
 # quando preciso, por produto, tipo de seguro e programa, até cada parte ficar abaixo do limite.
-BCB_UF = {"51": "14", "52": "10", "31": "12", "29": "6", "17": "28", "21": "11", "22": "18"}   # IBGE -> código do BCB
+BCB_UF = {}   # IBGE -> código de estado do BCB, descoberto na primeira consulta
+
+
+def mapear_estados(ano, mes):
+    """O BCB usa numeração própria para os estados; lê uma linha de cada código e liga ao prefixo IBGE."""
+    from concurrent.futures import ThreadPoolExecutor
+    def um(cb):
+        u = f"{SICOR}?$format=json&$select=codIbge&$top=1&$filter=" + urllib.parse.quote(
+            f"AnoEmissao eq '{ano}' and MesEmissao eq '{mes:02d}' and cdEstado eq '{cb}'")
+        v = json.loads(get(u))["value"]
+        return cb, (v[0]["codIbge"] or "")[:2] if v else ""
+    with ThreadPoolExecutor(max_workers=6) as ex:
+        for cb, pre in ex.map(um, [str(i) for i in range(0, 31)]):
+            if pre in UFS:
+                BCB_UF[pre] = cb
+    faltam = set(UFS) - set(BCB_UF)
+    if faltam:
+        raise SystemExit(f"códigos de estado do BCB não encontrados para {faltam}")
+    print("  estados BCB:", {UFS[k]: v for k, v in BCB_UF.items()}, flush=True)
 LIMITE = 5000
 DIMS = ["cdProduto", "cdTipoSeguro", "cdPrograma", "cdFonteRecurso", "cdModalidade"]
 CAMPOS = "codIbge,nomeProduto,VlCusteio,AreaCusteio," + ",".join(DIMS)
@@ -110,9 +128,12 @@ def sicor_mes(ano, mes):
 def credito():
     hoje = datetime.now(BRT)
     ano = hoje.year if hoje.month >= 7 else hoje.year - 1     # safra começa em julho
+    mapear_estados(ano, 7)
     meses = []
     for mes in range(7, 13):
-        if not sicor_consulta(f"AnoEmissao eq '{ano}' and MesEmissao eq '{mes:02d}' and cdEstado eq '14'")[:1]:
+        u = f"{SICOR}?$format=json&$select=codIbge&$top=1&$filter=" + urllib.parse.quote(
+            f"AnoEmissao eq '{ano}' and MesEmissao eq '{mes:02d}' and cdEstado eq '{BCB_UF['51']}'")
+        if not json.loads(get(u))["value"]:
             break
         meses.append((mes, sicor_mes(ano, mes)))
     if not meses:
