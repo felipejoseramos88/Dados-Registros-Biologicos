@@ -1,0 +1,36 @@
+name: Coleta Território e Comex
+
+on:
+  schedule:
+    - cron: "53 10 8,22 * *"   # dias 8 e 22 às 07h53 (Brasília): crédito e importação saem mensalmente
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+
+jobs:
+  coleta:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+      - name: Importação de fertilizantes (Comex Stat)
+        run: python coleta_comex.py
+      - name: Território (IBGE, Banco Central, SIPEAGRO)
+        run: python coleta_territorio.py
+      - name: Gravar o resultado no repositório
+        if: always()
+        run: |
+          git config user.name "coleta-territorio"
+          git config user.email "coleta-territorio@users.noreply.github.com"
+          git add dados/
+          git diff --cached --quiet && exit 0
+          git commit -m "Território e Comex: coleta de $(TZ=America/Sao_Paulo date +%d/%m/%Y)"
+          for i in 1 2 3; do
+            git pull --rebase origin main && git push origin HEAD:main && exit 0
+            sleep 10
+          done
+          exit 1
