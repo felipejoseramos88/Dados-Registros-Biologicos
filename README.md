@@ -20,3 +20,9 @@ A tarefa `.github/workflows/agrofit.yml` roda todo dia às 06h17 (Brasília), an
 
 ## Critério de biológico
 Se o arquivo tiver uma coluna que marque o produto como biológico, ela é usada. Se não tiver, o produto entra quando o ingrediente ativo traz um agente biológico conhecido (fungos, bactérias, vírus, macrobiológicos, semioquímicos, extratos) ou a classe indica microbiológico, biológico ou feromônio. O resumo informa qual critério foi usado.
+
+## SIPEAGRO (semanal)
+`coleta_sipeagro.py`, pela tarefa `.github/workflows/sipeagro.yml` (segunda, 06h37), lê os estabelecimentos da área de fertilizantes, inoculantes e corretivos nos dados abertos do MAPA e grava `dados/sipeagro_bio.json`: fábricas e importadores de inoculante e biofertilizante por UF e empresa, e revendas (comerciantes) por UF e município.
+
+## Movimentos do Agrofit
+A cada coleta diária, `coleta_agrofit.py` compara a lista de biológicos com a do dia anterior e acrescenta em `dados/agrofit_movimentos.csv` os produtos que entraram ou saíram do cadastro.
