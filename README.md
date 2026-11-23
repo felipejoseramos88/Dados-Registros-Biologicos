@@ -26,3 +26,10 @@ Se o arquivo tiver uma coluna que marque o produto como biológico, ela é usada
 
 ## Movimentos do Agrofit
 A cada coleta diária, `coleta_agrofit.py` compara a lista de biológicos com a do dia anterior e acrescenta em `dados/agrofit_movimentos.csv` os produtos que entraram ou saíram do cadastro.
+
+## Território e importação (dias 8 e 22, 07h53)
+
+- `coleta_comex.py` → `dados/comex_fertilizantes.json`: importação de adubos e fertilizantes (capítulo 31 da NCM) pela API do Comex Stat, total do ano, comparação com o ano anterior, estados de destino e série mensal.
+- `coleta_territorio.py` → `dados/territorio.json` e `dados/territorio_municipios.csv`: para os municípios de MT, GO, MG, BA, TO, MA e PI, área plantada das culturas-alvo (IBGE, PAM), crédito de custeio agrícola da safra corrente e do mesmo período do ano anterior (Banco Central, SICOR), revendas com registro ativo (SIPEAGRO) e mercado potencial estimado de biológicos.
+- A API do Banco Central só aceita até 5.000 linhas por consulta e não pagina; a coleta divide as consultas por estado, mês e produto. Meses fechados ficam em `dados/cache_sicor/` para não serem consultados de novo. Uma coleta completa leva cerca de uma hora.
+- Para coletar só a importação, rode a tarefa manualmente marcando "Coletar só a importação de fertilizantes".

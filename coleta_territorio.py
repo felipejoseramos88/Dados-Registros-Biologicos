@@ -143,7 +143,7 @@ def credito():
             if c[:2] in UFS:
                 atual[c] += float(r["VlCusteio"] or 0)
                 area_cred[c] += float(r.get("AreaCusteio") or 0)
-                por_cultura[(UFS[c[:2]], (r.get("nomeProduto") or "").strip('"').title())] += float(r["VlCusteio"] or 0)
+                por_cultura[(UFS[c[:2]], (r.get("nomeProduto") or "").strip('"').capitalize())] += float(r["VlCusteio"] or 0)
         for r in sicor_mes(ano - 1, mes):
             c = (r.get("codIbge") or "")
             if c[:2] in UFS:
