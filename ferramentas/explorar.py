@@ -1,28 +1,35 @@
 """Inspeção das bases da Etapa 2 (uso manual pelo Actions)."""
-import json, re, urllib.request, urllib.parse
+import json, re, urllib.request, urllib.parse, io, csv
+from collections import Counter
 UA = {"User-Agent": "BioCAZ-inteligencia-de-mercado/1.0 (dados abertos)"}
-def get(url, n=1500, data=None, ct=None):
+def get(url, n=1500, show=True):
     try:
-        h = dict(UA)
-        if ct: h["Content-Type"] = ct
-        r = urllib.request.urlopen(urllib.request.Request(url, data=data, headers=h), timeout=180)
+        r = urllib.request.urlopen(urllib.request.Request(url, headers=UA), timeout=300)
         b = r.read()
-        print(f"\n### OK {r.status} {len(b)} bytes · {url}\n{b[:n].decode('utf-8','replace')}")
+        if show: print(f"\n### OK {r.status} {len(b)} bytes · {url}\n{b[:n].decode('utf-8','replace')}")
         return b
     except Exception as e:
-        print(f"\n### ERRO {url}\n{e}")
+        print(f"\n### ERRO {url}\n{e}"); return None
 S = "https://olinda.bcb.gov.br/olinda/servico/SICOR/versao/v2/odata/"
-get(S + "CusteioMunicipioProduto?$top=3&$format=json", 2500)
-get(S + "CusteioMunicipioProduto?$top=5&$format=json&$filter=" + urllib.parse.quote("AnoEmissao eq '2026' and nomeUF eq 'MT'"), 2500)
-get(S + "$metadata", 6000)
-# Comex Stat: importação NCM capítulo 31 por UF, 2026
-q = {"flow": "import", "monthDetail": False, "period": {"from": "2026-01", "to": "2026-10"},
-     "filters": [{"filter": "chapter", "values": ["31"]}], "details": ["state"], "metrics": ["metricFOB", "metricKG"]}
-get("https://api-comexstat.mdic.gov.br/general?language=pt", 2500, json.dumps(q).encode(), "application/json")
-# Conab: página de downloads do portal
-b = get("https://portaldeinformacoes.conab.gov.br/download-arquivos.html", 200)
-if b:
-    for h in sorted(set(re.findall(r'href="([^"]+\.(?:txt|csv|xlsx|zip))"', b.decode("utf-8", "replace"))))[:60]:
-        print("  ", h)
-for nome in ["SerieHistoricaGraos.txt", "ProgressoSafra.txt", "LevantamentoGraos.txt", "PrecosSemanalUF.txt"]:
-    get("https://portaldeinformacoes.conab.gov.br/downloads/arquivos/" + nome, 400)
+md = get(S + "$metadata", 0, False).decode()
+m = re.search(r'<EntityType Name="TipoCusteioMunicipioProduto">(.*?)</EntityType>', md)
+print("CAMPOS CusteioMunicipioProduto:", re.findall(r'Name="(\w+)"', m.group(1)) if m else "?")
+fs = re.findall(r'<FunctionImport Name="(\w+)"[^>]*>', md); print("FUNCOES:", fs[:30])
+print(re.findall(r'<EntitySet Name="CusteioMunicipioProduto"[^>]*>', md))
+for f in ["AnoEmissao eq '2026' and cdEstado eq '51'", "AnoEmissao eq '2026'"]:
+    get(S + "CusteioMunicipioProduto?$format=json&$top=3&$filter=" + urllib.parse.quote(f), 1500)
+# Conab preços: produtos com 'fertiliz' ou fórmulas
+b = get("https://portaldeinformacoes.conab.gov.br/downloads/arquivos/PrecosSemanalUF.txt", 0, False)
+t = b.decode("latin-1")
+rows = list(csv.reader(io.StringIO(t), delimiter=";"))
+print("PRECOS cabeçalho:", rows[0], len(rows))
+c = Counter((r[0].strip(), r[1].strip()) for r in rows[1:] if r and r[5].strip() >= "2026")
+print("PRODUTOS 2026:", c.most_common(120))
+print("NIVEIS:", Counter(r[9].strip() for r in rows[1:]).most_common())
+# Conab levantamento: últimos levantamentos
+b = get("https://portaldeinformacoes.conab.gov.br/downloads/arquivos/LevantamentoGraos.txt", 0, False)
+t = b.decode("latin-1"); rows = list(csv.reader(io.StringIO(t), delimiter=";"))
+print("LEV cab:", rows[0])
+print("LEV safras/levs:", sorted(Counter((r[0].strip(), r[5].strip(), r[6].strip()) for r in rows[1:] if r[0].strip() >= "2025/26").items())[-12:])
+print("LEV produtos:", Counter(r[3].strip() for r in rows[1:] if r[0].strip() == "2026/27").most_common(30))
+print("LEV safra campo:", Counter(r[1].strip() for r in rows[1:] if r[0].strip() == "2026/27").most_common())
