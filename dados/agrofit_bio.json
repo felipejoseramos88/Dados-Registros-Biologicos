@@ -2,8 +2,8 @@
  "fonte": "MAPA · Agrofit, dados abertos (produtos formulados)",
  "url": "https://dados.agricultura.gov.br/dataset/6c913699-e82e-4da3-a0a1-fb6c431e367f/resource/d30b30d7-e256-484e-9ab8-cd40974e1238/download/agrofitprodutosformulados.csv",
  "arquivoAtualizadoEm": "23/11/2026",
- "lidoEm": "23/11/2026 07h31",
- "lidoIso": "2026-11-23T07:31:35-03:00",
+ "lidoEm": "23/11/2026 16h00",
+ "lidoIso": "2026-11-23T16:00:37-03:00",
  "tamanhoMB": 397.2,
  "codificacao": "utf-8-sig",
  "colunas": {
@@ -358,5 +358,9 @@
  ],
  "alerta": null,
  "variacaoFormulados": 0.0,
+ "entraramHoje": 0,
+ "saíramHoje": 0,
+ "movimentosRecentes": [],
+ "movimentosDesde": "23/11/2026",
  "arquivoProdutos": "dados/agrofit_bio_produtos.json"
 }
