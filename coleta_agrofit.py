@@ -285,6 +285,38 @@ def main():
                 f"{saida['produtosFormulados']};{saida['biologicos']};{saida['organicos']}\n")
 
     produtos = saida.pop("produtos")
+
+    # Movimentos: produtos biológicos que entraram ou saíram do cadastro desde a leitura anterior
+    import os
+    arq_prod = a.saida.replace(".json", "_produtos.json")
+    arq_mov = os.path.join(os.path.dirname(a.saida) or ".", "agrofit_movimentos.csv")
+    antes = {}
+    try:
+        antes = {x[0]: x for x in json.load(open(arq_prod, encoding="utf-8"))["produtos"]}
+    except (OSError, ValueError, KeyError):
+        pass
+    agora_set = {x[0]: x for x in produtos}
+    if antes and not saida["alerta"]:
+        entrou = [agora_set[k] for k in agora_set.keys() - antes.keys()]
+        saiu = [antes[k] for k in antes.keys() - agora_set.keys()]
+        novo_mov = not os.path.exists(arq_mov)
+        with open(arq_mov, "a", encoding="utf-8", newline="") as f:
+            w = csv.writer(f, delimiter=";")
+            if novo_mov:
+                w.writerow(["data", "movimento", "registro", "marca", "ingrediente", "titular", "grupo"])
+            dia = saida["lidoEm"].split(" ")[0]
+            for x in sorted(entrou):
+                w.writerow([dia, "entrou", x[0], x[1], x[2], x[3], x[4]])
+            for x in sorted(saiu):
+                w.writerow([dia, "saiu", x[0], x[1], x[2], x[3], x[4]])
+        saida["entraramHoje"] = len(entrou)
+        saida["saíramHoje"] = len(saiu)
+    movs = []
+    if os.path.exists(arq_mov):
+        with open(arq_mov, encoding="utf-8") as f:
+            movs = list(csv.reader(f, delimiter=";"))[1:]
+    saida["movimentosRecentes"] = movs[-25:][::-1]
+    saida["movimentosDesde"] = movs[0][0] if movs else saida["lidoEm"].split(" ")[0]
     saida["arquivoProdutos"] = a.saida.replace(".json", "_produtos.json")
     with open(a.saida, "w", encoding="utf-8") as f:
         json.dump(saida, f, ensure_ascii=False, indent=1)
