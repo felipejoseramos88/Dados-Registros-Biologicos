@@ -10,7 +10,7 @@ na área das culturas-alvo no Brasil. É uma estimativa da ferramenta, não um d
 
 Saídas: dados/territorio.json (resumo) e dados/territorio_municipios.csv (todos os municípios).
 """
-import csv, io, json, re, sys, time, unicodedata, urllib.parse, urllib.request
+import csv, io, json, os, re, sys, time, unicodedata, urllib.parse, urllib.request
 from collections import defaultdict
 from datetime import datetime, timezone, timedelta
 
@@ -25,14 +25,14 @@ SIPEAGRO = ("https://dados.agricultura.gov.br/dataset/52a01565-72d6-410e-b21b-64
             "resource/e0bbc9d5-f161-448b-a6d4-c7beb312ec33/download/sipeagrofertilizante.csv")
 
 
-def get(url, tent=4):
+def get(url, tent=8):
     for n in range(tent):
         try:
             with urllib.request.urlopen(urllib.request.Request(url, headers=UA), timeout=300) as r:
                 return r.read()
         except Exception as e:
             print(f"tentativa {n+1}: {e} · {url[:120]}", file=sys.stderr)
-            time.sleep(15 * (n + 1))
+            time.sleep(min(20 * (n + 1), 90))
     raise SystemExit(f"falhou: {url}")
 
 
@@ -65,25 +65,8 @@ def pam():
 # ---------- Banco Central · SICOR ----------
 # A API não aceita $skip e devolve no máximo 5.000 linhas: dividimos a consulta por estado, mês e,
 # quando preciso, por produto, tipo de seguro e programa, até cada parte ficar abaixo do limite.
-BCB_UF = {}   # IBGE -> código de estado do BCB, descoberto na primeira consulta
-
-
-def mapear_estados(ano, mes):
-    """O BCB usa numeração própria para os estados; lê uma linha de cada código e liga ao prefixo IBGE."""
-    from concurrent.futures import ThreadPoolExecutor
-    def um(cb):
-        u = f"{SICOR}?$format=json&$select=codIbge&$top=1&$filter=" + urllib.parse.quote(
-            f"AnoEmissao eq '{ano}' and MesEmissao eq '{mes:02d}' and cdEstado eq '{cb}'")
-        v = json.loads(get(u))["value"]
-        return cb, (v[0]["codIbge"] or "")[:2] if v else ""
-    with ThreadPoolExecutor(max_workers=6) as ex:
-        for cb, pre in ex.map(um, [str(i) for i in range(0, 31)]):
-            if pre in UFS:
-                BCB_UF[pre] = cb
-    faltam = set(UFS) - set(BCB_UF)
-    if faltam:
-        raise SystemExit(f"códigos de estado do BCB não encontrados para {faltam}")
-    print("  estados BCB:", {UFS[k]: v for k, v in BCB_UF.items()}, flush=True)
+# Numeração de estados do BCB (ordem alfabética das siglas, conferida em 23/11/2026 pelo município de cada código)
+BCB_UF = {"51": "14", "52": "10", "31": "12", "29": "5", "17": "28", "21": "11", "22": "18"}
 LIMITE = 5000
 DIMS = ["cdProduto", "cdTipoSeguro", "cdPrograma", "cdFonteRecurso", "cdModalidade"]
 CAMPOS = "codIbge,nomeProduto,VlCusteio,AreaCusteio," + ",".join(DIMS)
@@ -110,25 +93,38 @@ def sicor_partes(filtro, nivel=0):
     return out
 
 
+CACHE = os.path.join("dados", "cache_sicor")
+
+
 def sicor_mes(ano, mes):
-    from concurrent.futures import ThreadPoolExecutor
+    """Linhas do mês já somadas por município e produto. Meses fechados ficam guardados em cache."""
+    arq = os.path.join(CACHE, f"{ano}-{mes:02d}.json")
+    hoje = datetime.now(BRT)
+    fechado = (hoje.year - ano) * 12 + hoje.month - mes >= 3
+    if fechado and os.path.exists(arq):
+        return [dict(zip(("codIbge", "nomeProduto", "VlCusteio", "AreaCusteio"), r)) for r in json.load(open(arq))]
     base = f"AnoEmissao eq '{ano}' and MesEmissao eq '{mes:02d}' and Atividade eq '1'"
-    with ThreadPoolExecutor(max_workers=4) as ex:
-        partes = list(ex.map(lambda cb: sicor_partes(f"{base} and cdEstado eq '{cb}'"), BCB_UF.values()))
-    linhas = [r for p in partes for r in p]
-    # confere se o código do BCB corresponde ao estado esperado
-    for (ibge, cb), p in zip(BCB_UF.items(), partes):
+    soma = defaultdict(lambda: [0.0, 0.0])
+    for ibge, cb in BCB_UF.items():
+        p = sicor_partes(f"{base} and cdEstado eq '{cb}'")
         errados = [r for r in p if not (r.get("codIbge") or "").startswith(ibge)]
         if p and len(errados) > len(p) * 0.02:
             raise SystemExit(f"código de estado do BCB {cb} não corresponde à UF {ibge}")
-    print(f"  crédito {mes:02d}/{ano}: {len(linhas)} linhas", flush=True)
-    return linhas
+        for r in p:
+            k = (r.get("codIbge") or "", (r.get("nomeProduto") or "").strip('"'))
+            soma[k][0] += float(r.get("VlCusteio") or 0)
+            soma[k][1] += float(r.get("AreaCusteio") or 0)
+    linhas = [[k[0], k[1], round(v[0], 2), round(v[1], 2)] for k, v in sorted(soma.items())]
+    if fechado:
+        os.makedirs(CACHE, exist_ok=True)
+        json.dump(linhas, open(arq, "w"), ensure_ascii=False, separators=(",", ":"))
+    print(f"  crédito {mes:02d}/{ano}: {len(linhas)} pares município × produto", flush=True)
+    return [dict(zip(("codIbge", "nomeProduto", "VlCusteio", "AreaCusteio"), r)) for r in linhas]
 
 
 def credito():
     hoje = datetime.now(BRT)
     ano = hoje.year if hoje.month >= 7 else hoje.year - 1     # safra começa em julho
-    mapear_estados(ano, 7)
     meses = []
     for mes in range(7, 13):
         u = f"{SICOR}?$format=json&$select=codIbge&$top=1&$filter=" + urllib.parse.quote(
