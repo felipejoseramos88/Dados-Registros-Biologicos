@@ -1,9 +1,9 @@
 {
  "fonte": "MAPA · Agrofit, dados abertos (produtos formulados)",
  "url": "https://dados.agricultura.gov.br/dataset/6c913699-e82e-4da3-a0a1-fb6c431e367f/resource/d30b30d7-e256-484e-9ab8-cd40974e1238/download/agrofitprodutosformulados.csv",
- "arquivoAtualizadoEm": "23/11/2026",
- "lidoEm": "23/11/2026 16h00",
- "lidoIso": "2026-11-23T16:00:37-03:00",
+ "arquivoAtualizadoEm": "24/11/2026",
+ "lidoEm": "24/11/2026 07h25",
+ "lidoIso": "2026-11-24T07:25:33-03:00",
  "tamanhoMB": 397.2,
  "codificacao": "utf-8-sig",
  "colunas": {
@@ -65,7 +65,7 @@
  "classes": [
   [
    "Inseticida Microbiológico",
-   423
+   422
   ],
   [
    "Fungicida microbiológico",
@@ -77,11 +77,11 @@
   ],
   [
    "Agente Biológico de Controle",
-   104
+   106
   ],
   [
    "Inseticida biológico",
-   101
+   102
   ],
   [
    "Acaricida Microbiológico",
@@ -361,6 +361,6 @@
  "entraramHoje": 0,
  "saíramHoje": 0,
  "movimentosRecentes": [],
- "movimentosDesde": "23/11/2026",
+ "movimentosDesde": "24/11/2026",
  "arquivoProdutos": "dados/agrofit_bio_produtos.json"
 }
