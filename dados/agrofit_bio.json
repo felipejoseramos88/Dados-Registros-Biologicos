@@ -1,10 +1,10 @@
 {
  "fonte": "MAPA · Agrofit, dados abertos (produtos formulados)",
  "url": "https://dados.agricultura.gov.br/dataset/6c913699-e82e-4da3-a0a1-fb6c431e367f/resource/d30b30d7-e256-484e-9ab8-cd40974e1238/download/agrofitprodutosformulados.csv",
- "arquivoAtualizadoEm": "24/11/2026",
- "lidoEm": "24/11/2026 07h25",
- "lidoIso": "2026-11-24T07:25:33-03:00",
- "tamanhoMB": 397.2,
+ "arquivoAtualizadoEm": "25/11/2026",
+ "lidoEm": "25/11/2026 07h27",
+ "lidoIso": "2026-11-25T07:27:57-03:00",
+ "tamanhoMB": 397.6,
  "codificacao": "utf-8-sig",
  "colunas": {
   "registro": "NR_REGISTRO",
@@ -19,8 +19,8 @@
   "formulacao": "FORMULACAO"
  },
  "delimitador": ";",
- "linhasLidas": 281976,
- "produtosFormulados": 4435,
+ "linhasLidas": 282010,
+ "produtosFormulados": 4434,
  "biologicos": 948,
  "criterio": "agente biológico no ingrediente ativo",
  "organicos": 465,
@@ -77,7 +77,7 @@
   ],
   [
    "Agente Biológico de Controle",
-   106
+   107
   ],
   [
    "Inseticida biológico",
@@ -297,7 +297,7 @@
   ],
   [
    "Soja",
-   30
+   31
   ],
   [
    "Tomate",
@@ -305,7 +305,7 @@
   ],
   [
    "Milho",
-   23
+   24
   ],
   [
    "Feijão",
@@ -357,10 +357,10 @@
   ]
  ],
  "alerta": null,
- "variacaoFormulados": 0.0,
+ "variacaoFormulados": -0.0,
  "entraramHoje": 0,
  "saíramHoje": 0,
  "movimentosRecentes": [],
- "movimentosDesde": "24/11/2026",
+ "movimentosDesde": "25/11/2026",
  "arquivoProdutos": "dados/agrofit_bio_produtos.json"
 }
